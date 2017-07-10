@@ -1,0 +1,6 @@
+Design:
+--------
+1. Server - Which should manage all download
+2. Client --|-->Command line client
+			|-->GUI client..(Tinker/Wx)
+			|-->WebUI client..

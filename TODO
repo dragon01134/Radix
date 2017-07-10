@@ -1,0 +1,7 @@
+TODO List
+---------------
+
+1. Simple Download manager(First video) then go for other file format.(Command)
+3. Use youtube-dl's advance feature to download multiple chunk  at same time.
+3. Add for suport for multiple chunk download for file format.
+4. Design GUI. 
