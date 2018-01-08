@@ -1,3 +1,9 @@
+//Make it compatible to run on different browser 
+window.browser = (function () {
+  return window.msBrowser ||
+    window.browser ||
+    window.chrome;
+})();
 browser.contextMenus.create({
     id: "download_link",
     title: "Download this link video",
