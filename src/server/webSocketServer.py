@@ -1,3 +1,7 @@
+#import sys
+#sys.path.insert(0,'../packages/websocket_server/')
+
+
 from websocket_server import WebsocketServer
 import json
 
@@ -7,8 +11,10 @@ class WebServer(WebsocketServer):
 		if port is None:
 			print("Port is None, Returning None")
 			return None
-
-		super(WebsocketServer, self).__init__(self,port)
+		self.port_number = port	
+		#super(WebsocketServer, self).__init__(self,self.port_number)
+		super().__init__(port)
+		
 		self.set_fn_new_client(self.new_client)
 		self.set_fn_client_left(self.client_left)
 		self.set_fn_message_received(self.message_received)
@@ -25,15 +31,15 @@ class WebServer(WebsocketServer):
 
 	def message_received(self,client, server, message):
 		""" Called when a client sends a message"""
-		if len(message) > 200:
-			message = message[:200]
-		else:
-			return
+		#Don't Need this, keeping commented for future reference
+		#if len(message) > 200:
+		#	message = message[:200]
 		url_obj=json.loads(message)
 		print(url_obj['url'])
 		with open('link','a+') as file:
 			file.write(url_obj['url']+'\n')
 			file.close()
+			
 
 	def run(self):
 		self.run_forever()
@@ -41,7 +47,8 @@ class WebServer(WebsocketServer):
 
 
 if __name__ == '__main__':
-	server = WebServer(9999)	
+	server = WebServer(9999)
+	server.run()	
 
 #server = WebsocketServer(PORT)
 #server.set_fn_new_client(new_client)
