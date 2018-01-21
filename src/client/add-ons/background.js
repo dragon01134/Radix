@@ -4,16 +4,23 @@ window.browser = (function () {
     window.browser ||
     window.chrome;
 })();
+
 browser.contextMenus.create({
     id: "download_link",
     title: "Download this link video",
     contexts: ["link"],
 });
+
 browser.contextMenus.onClicked.addListener((info, tab) => {
 		 if (info.menuItemId === "download_link") {
   		 	console.log("URL is "+info.linkUrl);
 	   	 	sendlink(info.linkUrl);
    		}
+});
+
+browser.browserAction.onClicked.addListener((tab) => {
+   console.log("URL is "+tab.url);
+   sendlink(tab.url);
 });
 
 function sendlink(link) 
@@ -46,13 +53,13 @@ function WebSocketSend(entry)
                ws.onmessage = function (evt) 
                { 
                   var received_msg = evt.data;
-                  alert("Message is received...");
+                  //alert("Message is received...");
                };
 				
                ws.onclose = function()
                { 
                   // websocket is closed.
-                  alert("Connection is closed..."); 
+                  //alert("Connection is closed..."); 
                };
          }
             
